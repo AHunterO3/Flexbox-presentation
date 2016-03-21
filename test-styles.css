@@ -1,0 +1,55 @@
+/* NAV EXAMPLES */
+/*********************/
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.nav-item {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    background-color: teal;
+    border-bottom: 1px solid black;
+}
+
+@media screen and (min-width: 768px) {
+    .nav {
+        flex-direction: row;
+    }
+}
+
+.nav-item a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 15px;
+}
+
+/* GALLERY EXAMPLES */
+/*********************/
+.gallery {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.gallery-item {
+    flex-basis: 32%;
+    padding: 10px;
+    background-color: gray;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
