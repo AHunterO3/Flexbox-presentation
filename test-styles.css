@@ -8,6 +8,7 @@ ul {
 .container {
     max-width: 1000px;
     margin: 0 auto;
+    position: relative;
 }
 
 .nav {
@@ -47,9 +48,33 @@ ul {
 }
 
 .gallery-item {
-    flex-basis: 32%;
+    flex-basis: 33%;
     padding: 10px;
     background-color: gray;
     box-sizing: border-box;
     margin-bottom: 20px;
+}
+
+/* LAYOUT EXAMPLES */
+/*********************/
+.center-vert {
+    display: flex;
+    align-items: center;
+}
+
+.center-horizontal {
+    display: flex;
+    justify-content: center;
+}
+
+.center-both {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center {
+    height: 100px;
+    background-color: orange;
+    margin-bottom: 25px;
 }

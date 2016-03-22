@@ -43,6 +43,9 @@
 				<section>
 					<h1><code>Flexbox</code></h1>
 					<h3 class="fragment">Why flexbox is awesome.</h3>
+					<aside class="notes">
+						Flexbox is amazing. There are so many quirks that you can run into on a daily basis with CSS and they can sometimes cause serious headaches. Flex is here to
+						make our lives a little easier.
 				</section>
 
 				<section>
@@ -56,9 +59,12 @@
 						<li class="fragment">Page Layouts</li>
 						<li class="fragment">Alignment Issues</li>
 					</ul>
+					<aside class="notes">
+						It provides tons of tools for making things like navigation, pagination, headers/footers, galleries, and many other things simpler.
+						Like any new web technology there is a lag in adoption with older browsers, and various quirks to look out for. Overall its a fantastic tool that will make your life on the front end considerably easier.
+					</aside>
 				</section>
 
-				<!-- Example of nested vertical slides -->
 				<section>
 					<section>
 						<h2>Browser Support</h2>
@@ -66,9 +72,18 @@
 							<img src="images/browser-usage.png" alt="">
 							<figcaption>Usage relative browser support</figcaption>
 						</figure>
+						<aside class="notes">
+							This picture shows ups that support for flexbox is nearly universal at this point. IE 8 and 9 are the last two browsers that have no support at all for it, how ever
+							microsoft has done us all a favor and killed these. Looking at IE 10 + youll notice it only has partial support, thats because they implemented an older specification from 2012.
+							Many of the same core concepts and techniques still work, you will just need to look for alternative properties that IE 10 might use.
+						</aside>
+
 					</section>
-					<section>
-						<img src="http://i.giphy.com/QyrysGo7Hz70I.gif" alt="">
+					<section data-background="http://i.giphy.com/QyrysGo7Hz70I.gif">
+
+						<aside class="notes">
+							Basically, youre good to go. Unless you need to support old browsers, I highly suggest using flex on your next project.
+						</aside>
 					</section>
 					<section>
 						<h2>Good support with a few gotcha's:</h2>
@@ -78,16 +93,27 @@
 							<li>Vendor Prefixes</li>
 							<li>Android Stock Browser quirks</li>
 						</ul>
+						<aside class="notes">
+							A couple other caveats that should be noted before diving in with flexbox is that is requires some seriously heavy vendor prefixing. Luckily gulp autoprefixer is a thing
+							that makes your life in this respect cake. I wouldnt suggest using flexbox without it unless you love typing '-webkit' over and over. Additionally there are some odd quirks
+							that the android native browser has with flex, ill go into more detail on this later
+						</aside>
 					</section>
 				</section>
 
+
+					<section data-background="http://i.giphy.com/KBCxijnlSs9jy.gif">
+						<h2>When to use flexbox?</h2>
+
+						<aside class="notes">
+							There are a few use cases that flexbox is a god send for. It can do everything from page layouts to element alignment, but it really shines in
+							a few scenarios.
+						</aside>
+					</section>
 				<section>
 					<section>
-						<h2>When to use flexbox?</h2>
-					</section>
-
-					<section>
 						<h2>Navigation</h2>
+						<h3>(or pagination)</h3>
 						<img src="images/sample-nav.png" alt="">
 						<pre>
 							<code data-trim data-noescape>
@@ -106,7 +132,9 @@
 							</code>
 						</pre>
 						<aside class="notes">
-							This is a simple fairly standard looking nav. Its not complicated to make, and is traditonally done using floats, display inline-block, or display table-cell
+							First use is navigation. It adds a few quality of life improvements that are simply difficult to live without once you start using them.
+							This is a simple fairly standard looking nav. Its not complicated to make, and is traditonally done using floats, display inline-block, or display table-cell.
+							Most useful when an unknown number of elements are at play. (next)
 						</aside>
 					</section>
 
@@ -131,10 +159,11 @@
 						<aside class="notes">
 					        We can take this flex based nav one step further and set it up for mobile use simply by changing the flex-direction property. No fumbling with changing the display or clearing floats.
 							The main advantage here is that flex doesnt need to know the number of children, it will fit all children proportionally (using space-around) in
-							the remaining space. This becomes a major advantage when the number of children is unknown i.e. pagination
+							the remaining space
 						</aside>
 					</section>
-
+				</section>
+				<section>
 					<section>
 						<h2>Galleries</h2>
 						<img src="images/gallery.png" alt="" height="500px">
@@ -146,28 +175,228 @@
 					</section>
 					<section>
 						<h2>Galleries</h2>
-						<img src="images/gallery.png" alt="">
 						<pre>
 							<code data-trim data-noescape>
-.nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.second-gallery .column-gallery-item {
+  width: 32.20339%;
+  float: left;
 }
-
-@media screen and (min-width: 768px) {
-    .nav {
-        flex-direction: row;
-    }
+.second-gallery .column-gallery-item:nth-child(3n + 1) {
+  margin-left: 0;
+  margin-right: -100%;
+  clear: both;
+  margin-left: 0;
+}
+.second-gallery .column-gallery-item:nth-child(3n + 2) {
+  margin-left: 33.89831%;
+  margin-right: -100%;
+  clear: none;
+}
+.second-gallery .column-gallery-item:nth-child(3n + 3) {
+  margin-left: 67.79661%;
+  margin-right: -100%;
+  clear: none;
 }
 							</code>
 						</pre>
 						<aside class="notes">
-					        A major advantage of using flexbox when you have a large number of items with variable content that need to be equal heights is being able
-							to set all children to grow to the height of the container without exclusively setting a height.
+							This is what the css might look like on an image grid not using flex. Negative margins and floats/clears provide for some pretty unreadable styles
+							This also doesnt take into account that heights between siblings can vary which is another beast all together without using absolute heights and overflows
+						</aside>
+					</section>
+					<section>
+						<h2>Galleries</h2>
+
+						<pre>
+							<code data-trim data-noescape>
+.gallery {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.gallery-item {
+	flex-basis: 33%;
+}
+							</code>
+						</pre>
+						<aside class="notes">
+							Oviously theres a little more going on here css wise but this is all you need to create fluid gallery layouts. Traditionaly grid layouts done with
+							flex require using the clearfix or adding negative margins to fix floating issues. Flex takes care of this by simply defining flex-wrap: wrap;
+							clearing its siblings properly. Additionally flexbox takes care of ensuring that all children are equal heights. No more padding hacks or overflow tricks
 						</aside>
 					</section>
 				</section>
+				<section>
+					<section data-background="http://i.giphy.com/ZHlGzvZb130nm.gif">
+						<h2>Layout Techniques</h2>
+
+						<aside class="notes">
+							Flex has tons of applications in front end developing if you get a little creative with it. There are a good amount of weird layout quirks youve probably run into
+							more than once, flexbox offers a ton of solutions to a lot of really common problems
+						</aside>
+					</section>
+
+					<section>
+						<h2>Horizontal & Vertical Center</h2>
+
+					<pre>
+						<code>
+.center-vert {
+	display: flex;
+	align-items: center;
+}
+
+.center-horizontal {
+	display: flex;
+	justify-content: center;
+}
+
+.center-both {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+						</code>
+					</pre>
+
+						<aside class="notes">
+							Centering in layouts is generally fairly simple, how ever it can get tricky when floats are applied or any sort of positioning comes into play.
+							Flexbox offers a quick way to center in any position, even inline elements. No tables or table-cells required
+							the main work being done here is justify-content and align-items. justify-content works along main axis, align-items works on the opposite
+						</aside>
+					</section>
+
+				</section>
+
+
+				<section>
+					<section data-background="http://i.giphy.com/TBXrZHVIuBSKc.gif">
+						<h2>Common Gotchas</h2>
+						<aside class="notes">
+							You got to be careful with flex, or you are going to start running into walls. One thing to keep in mind when working with flexbox is that some browsers only support the old syntax. Additionally,
+							the level of vendor prefixing necessary is mind boggling. Its hard to keep track of all of the different syntax on top of all the
+							prefixes.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Prefixes &amp; Syntax</h2>
+
+						<img src="images/prefixing.png" alt="">
+						<aside class="notes">
+							Luckily if calibrated properly, autoprefixer will do almost all of the heavy lifting for us. It knows exactly which syntax and prefix to use
+							and will do a lot of the dirty work when it comes to browser compatibility. As always though there should be tons of cross browser testing due to its
+							dynamic and unstable state.
+						</aside>
+					</section>
+					<section>
+						<h2>Autoprefixer</h2>
+						<h3 class="fragment">(you're going to need it)</h3>
+
+						<pre class="fragment">
+							<code>
+						.plans {
+						display: -webkit-box;
+						display: -webkit-flex;
+						display: -ms-flexbox;
+						display: flex; }
+						.plans > div {
+						-webkit-box-flex: 1;
+						-webkit-flex: 1 1 33%;
+						-ms-flex: 1 1 33%;
+						flex: 1 1 33%;
+						display: -webkit-box;
+						display: -webkit-flex;
+						display: -ms-flexbox;
+						display: flex;
+						-webkit-box-orient: vertical;
+						-webkit-box-direction: normal;
+						-webkit-flex-direction: column;
+						-ms-flex-direction: column;
+						flex-direction: column;
+						-webkit-box-align: start;
+						-webkit-align-items: flex-start;
+						-ms-flex-align: start;
+						align-items: flex-start; }
+						.plans > div .stretch {
+						width: 100%;
+						-webkit-box-flex: 1;
+						-webkit-flex: 1 0 auto;
+						-ms-flex: 1 0 auto;
+						flex: 1 0 auto; }
+							</code>
+						</pre>
+						<aside class="notes">
+							This is some sample css spit out by auto prefixer. Its ugly and huge and no one in their right mind would ever want to write this by hand.
+							Moral of the story is, use autoprefixer or you are going to be in trouble.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Browser Quirks</h2>
+						<ul>
+							<li class="fragment">IE 10+ min-height issues</li>
+							<li class="fragment">Android Stock browser weirdness < 4.4</li>
+						</ul>
+						<aside class="notes">
+							Since flexible box has been changed so many times and implemented so many ways in different browsers, it leaves a mine field of odd browser quirks to watch out for
+							Some noteable quirks include setting min-height on flex items in internet explorer prevents its children from seeing its height.
+							Android stock browsers have issues with certain space-around/between declerations below version 4.4 (came out late 2013).
+						</aside>
+					</section>
+
+				</section>
+
+				<section>
+					<section data-background="http://i.giphy.com/ELPtC7diADV2o.gif">
+						<h2>When not to use Flexbox</h2>
+
+						<aside class="notes">
+
+						</aside>
+					</section>
+
+					<section>
+						<h2>Pollyfill?</h2>
+						<h3 class="fragment">Yes!!</h3>
+						<a href="https://github.com/doctyper/reflexie/tree/develop" class="fragment">Sort of...</a>
+						<blockquote cite="https://github.com/doctyper/reflexie/tree/develop" class="fragment">
+							"Sooooo not ready for prime-time."
+						</blockquote>
+
+						<aside class="notes">
+							You may be wondering, is there a pollyfill? That answer is yes!!! Sort of... there is an (extremely buggy) pollyfill supporting the old syntax for IE 8
+							and this repo ive linked here supports the newer syntax but according to the developers is not even close to ready.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Dont Bother</h2>
+						<h4 class="fragment">(Internet explorer is lame)</h4>
+						<aside class="notes">
+							If you have to develop for older versions of IE, id say dont bother with trying to get flexbox to work. youll most likely end up spending
+							more time than you save. Luckily microsoft has done us a large favor and killed off older versions of IE. Flex is in your future!
+						</aside>
+					</section>
+
+				</section>
+
+				<section>
+					<h2>Resources</h2>
+					<ul>
+						<li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">css-tricks</a></li>
+						<li><a href="http://flexboxfroggy.com/">flexboxfroggy.com</a></li>
+					</ul>
+					<aside class="notes">
+						Oviously theres a little more going on here css wise but this is all you need to create fluid gallery layouts. Traditionaly grid layouts done with
+						flex require using the clearfix or adding negative margins to fix floating issues. Flex takes care of this by simply defining flex-wrap: wrap;
+						clearing its siblings properly. Additionally flexbox takes care of ensuring that all children are equal heights. No more padding hacks or overflow tricks
+					</aside>
+				</section>
+
+			</section>
 
 			</div>
 
