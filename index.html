@@ -100,7 +100,7 @@
 						</aside>
 					</section>
 				</section>
-
+			<section>
 				<section data-background="">
 					<h2>The basics</h2>
 					<ul>
@@ -120,6 +120,15 @@
 						what to do with the remaining space using grow and shrink.
 					</aside>
 				</section>
+
+				<section data-background="http://i.giphy.com/VHngktboAlxHW.gif">
+					<h2>The Magic</h2>
+					<aside class="notes">
+						The basics are pretty simple, however Flexbox is basically magic. That magic really shines through when you leverage the power of auto-adjusting heights, and flex wraps
+						that do away with the need for complex breakpoints and grid layouts.
+					</aside>
+				</section>
+			</section>
 
 				<section>
 					<section data-background="http://i.giphy.com/KBCxijnlSs9jy.gif">
@@ -235,13 +244,17 @@
 
 .gallery-item {
 	flex-basis: 33%;
+	flex-grow: 1;
+	flex: 1 0 33%;
 }
 							</code>
 						</pre>
 						<aside class="notes">
 							Oviously theres a little more going on here css wise but this is all you need to create fluid gallery layouts. Traditionaly grid layouts done with
 							flex require using the clearfix or adding negative margins to fix floating issues. Flex takes care of this by simply defining flex-wrap: wrap;
-							clearing its siblings properly. Additionally flexbox takes care of ensuring that all children are equal heights. No more padding hacks or overflow tricks
+							clearing its siblings properly. Additionally flexbox takes care of ensuring that all children are equal heights. No more padding hacks or overflow tricks.
+							One major advantage of creating galleries this way is that flex-wrap does away with the need for complex media queries since the browser will automatically reflow and expand all children
+							as necessary.
 						</aside>
 					</section>
 				</section>
@@ -283,6 +296,70 @@
 							Flexbox offers a quick way to center in any position, even inline elements. No tables or table-cells required
 							the main work being done here is justify-content and align-items. justify-content works along main axis, align-items works on the opposite
 						</aside>
+					</section>
+
+					<section>
+						<h2>Flex Grids</h2>
+
+						<aside class="notes">
+							Lets take a second to address this flex shorthand. Using "flex" like this you can specify flex-grow, flex-shrink, and flex basis all in one line.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Visual Order</h2>
+						<p class="fragment">Flexbox is order agnostic</p>
+						<pre class="fragment">
+							<code>
+.container {
+	flex-direction: row-reverse;
+}
+							</code>
+						</pre>
+						<pre class="fragment">
+							<code>
+.error {
+	order: 1;
+}
+							</code>
+						</pre>
+
+						<aside class="notes">
+							Another fantastic feature of flexbox is that its source order agnostic. That means if you need to reflow a layout at different screen sizes,
+							or you need quick client side ordering, flex can be used to arrange elements in any order despite their order in the document.
+							Adding reverse to either direction will automatically rearrange all children in reverse order. This could be helpful for Z-A style filtering
+							Additionally, the order property can be applied to any child of a flex container to arrange contents in a custom order. This could definitely come in handy
+							if you are trying to bump error messages to the top of a list.
+						</aside>
+					</section>
+
+					<section>
+						<h2>Sticky Footer</h2>
+						<img src="images/viewport-height.png" alt="">
+
+						<aside class="notes">
+							One common problem that requires a workaround is making the footer sticky to the bottom of the screen regardless of how little content is in the body.
+							This gets messy fast requiring things like negative margins and percentage based padding or tables. What is this, 2013?
+						</aside>
+					</section>
+
+					<section>
+						<h2>Sticky Footer</h2>
+						<pre>
+							<code>
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.body-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex: 1 0 auto;
+}
+							</code>
+						</pre>
 					</section>
 
 				</section>
