@@ -101,7 +101,27 @@
 					</section>
 				</section>
 
+				<section data-background="">
+					<h2>The basics</h2>
+					<ul>
+						<li class="fragment">Direction specifies main axis</li>
+						<li class="fragment">Justify works on main axis</li>
+						<li class="fragment">Align works on opposite axis</li>
+						<li class="fragment">Basis defines starting size</li>
+						<li class="fragment">Grow and shrink work with remaining space</li>
 
+					</ul>
+
+					<aside class="notes">
+						Lets go over the basics. Flexbox is built using an intuitive x and y axis. A main axis is defined for the flex container,
+						and things like alignment and ability to change width or height is relative to that axis.
+						You specify the main axis with flex-direction. you can align content along that axis with justify-content. You can align content
+						along the opposite axis with align items and content. You can specify initial sizing with flex-basis, and you can tell the children
+						what to do with the remaining space using grow and shrink.
+					</aside>
+				</section>
+
+				<section>
 					<section data-background="http://i.giphy.com/KBCxijnlSs9jy.gif">
 						<h2>When to use flexbox?</h2>
 
@@ -110,7 +130,6 @@
 							a few scenarios.
 						</aside>
 					</section>
-				<section>
 					<section>
 						<h2>Navigation</h2>
 						<h3>(or pagination)</h3>
@@ -139,7 +158,7 @@
 					</section>
 
 					<section>
-						<h2>Navigation</h2>
+						<h2>Mobile Navigation</h2>
 						<img src="images/sample-nav2.png" alt="" height="200px">
 						<pre>
 							<code data-trim data-noescape>
@@ -162,8 +181,6 @@
 							the remaining space
 						</aside>
 					</section>
-				</section>
-				<section>
 					<section>
 						<h2>Galleries</h2>
 						<img src="images/gallery.png" alt="" height="500px">
@@ -297,35 +314,35 @@
 
 						<pre class="fragment">
 							<code>
-						.plans {
-						display: -webkit-box;
-						display: -webkit-flex;
-						display: -ms-flexbox;
-						display: flex; }
-						.plans > div {
-						-webkit-box-flex: 1;
-						-webkit-flex: 1 1 33%;
-						-ms-flex: 1 1 33%;
-						flex: 1 1 33%;
-						display: -webkit-box;
-						display: -webkit-flex;
-						display: -ms-flexbox;
-						display: flex;
-						-webkit-box-orient: vertical;
-						-webkit-box-direction: normal;
-						-webkit-flex-direction: column;
-						-ms-flex-direction: column;
-						flex-direction: column;
-						-webkit-box-align: start;
-						-webkit-align-items: flex-start;
-						-ms-flex-align: start;
-						align-items: flex-start; }
-						.plans > div .stretch {
-						width: 100%;
-						-webkit-box-flex: 1;
-						-webkit-flex: 1 0 auto;
-						-ms-flex: 1 0 auto;
-						flex: 1 0 auto; }
+.plans {
+display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+display: flex; }
+.plans > div {
+-webkit-box-flex: 1;
+-webkit-flex: 1 1 33%;
+-ms-flex: 1 1 33%;
+flex: 1 1 33%;
+display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-orient: vertical;
+-webkit-box-direction: normal;
+-webkit-flex-direction: column;
+-ms-flex-direction: column;
+flex-direction: column;
+-webkit-box-align: start;
+-webkit-align-items: flex-start;
+-ms-flex-align: start;
+align-items: flex-start; }
+.plans > div .stretch {
+width: 100%;
+-webkit-box-flex: 1;
+-webkit-flex: 1 0 auto;
+-ms-flex: 1 0 auto;
+flex: 1 0 auto; }
 							</code>
 						</pre>
 						<aside class="notes">
@@ -337,13 +354,15 @@
 					<section>
 						<h2>Browser Quirks</h2>
 						<ul>
-							<li class="fragment">IE 10+ min-height issues</li>
+							<li class="fragment">IE 10+ min-height/max-height issues</li>
 							<li class="fragment">Android Stock browser weirdness < 4.4</li>
+							<li class="fragment">Old versions of Firefox (we are talking really old) dont support flex-wrap</li>
 						</ul>
 						<aside class="notes">
 							Since flexible box has been changed so many times and implemented so many ways in different browsers, it leaves a mine field of odd browser quirks to watch out for
 							Some noteable quirks include setting min-height on flex items in internet explorer prevents its children from seeing its height.
 							Android stock browsers have issues with certain space-around/between declerations below version 4.4 (came out late 2013).
+							Additionally, firefox 27 and below dont support flex-wrap, but thats pretty much a non-issue
 						</aside>
 					</section>
 
@@ -388,6 +407,7 @@
 					<ul>
 						<li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">css-tricks</a></li>
 						<li><a href="http://flexboxfroggy.com/">flexboxfroggy.com</a></li>
+						<li><a href="http://the-echoplex.net/flexyboxes/">Flexbox Playground</a></li>
 					</ul>
 					<aside class="notes">
 						Oviously theres a little more going on here css wise but this is all you need to create fluid gallery layouts. Traditionaly grid layouts done with
