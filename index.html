@@ -56,7 +56,7 @@
 					<ul>
 						<li class="fragment">Navigation</li>
 						<li class="fragment">Inline Forms</li>
-						<li class="fragment">Page Layouts</li>
+						<li class="fragment">Page components/Elements</li>
 						<li class="fragment">Alignment Issues</li>
 					</ul>
 					<aside class="notes">
@@ -103,6 +103,7 @@
 			<section>
 				<section data-background="">
 					<h2>The basics</h2>
+					<img src="images/flexbox.png" alt="" />
 					<ul>
 						<li class="fragment">Direction specifies main axis</li>
 						<li class="fragment">Justify works on main axis</li>
@@ -136,7 +137,7 @@
 
 						<aside class="notes">
 							There are a few use cases that flexbox is a god send for. It can do everything from page layouts to element alignment, but it really shines in
-							a few scenarios.
+							a few scenarios. DONT use it for overall page layouts. Its a little clunky in that sort of scenario, how ever
 						</aside>
 					</section>
 					<section>
@@ -152,10 +153,8 @@
 }
 
 .nav-item {
-    display: flex;
     flex-grow: 1;
     justify-content: center;
-    background-color: teal;
 }
 							</code>
 						</pre>
@@ -245,7 +244,6 @@
 .gallery-item {
 	flex-basis: 33%;
 	flex-grow: 1;
-	flex: 1 0 33%;
 }
 							</code>
 						</pre>
@@ -301,7 +299,26 @@
 					<section>
 						<h2>Flex Grids</h2>
 
+						<pre>
+							<code>
+.grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.grid-item {
+    flex-basis: 33%;
+    flex-basis: percentage(1/3);
+    flex: 0 0 33%;
+}
+							</code>
+						</pre>
+
 						<aside class="notes">
+							Lets talk about grids.
+							Flexbox is great for creating simple grid based layouts. Bootstrap and foundations have already made moves to support using flexbox, but its just as easy to roll your own.
+							As noted earlier flex-basis can be used to set the width of the grid item, and setting the container to wrap allows for infinite amounts of children.
 							Lets take a second to address this flex shorthand. Using "flex" like this you can specify flex-grow, flex-shrink, and flex basis all in one line.
 						</aside>
 					</section>
@@ -354,8 +371,6 @@ body {
 }
 
 .body-wrapper {
-    display: flex;
-    flex-direction: row;
     flex: 1 0 auto;
 }
 							</code>
@@ -477,6 +492,18 @@ flex: 1 0 auto; }
 						</aside>
 					</section>
 
+					<section>
+						<h2>Complex Layouts</h2>
+						<iframe src="http://output.jsbin.com/iYEmaTUF/3" width="100%" height="400px"></iframe>
+						<a href="http://output.jsbin.com/iYEmaTUF/3">source</a>
+						<aside class="notes">
+							The biggest upside of flex, the fact that it lets content dictate the layout can also cause some issues. Due to the fact that it is agnostic to the number of children
+							allowing items to fill their container can force reflows on slow connections. If you think of a massive content area with rich media and a small sidebar, which ever is first
+							in the layout will fill the screen and then reflow once information further on the page is received. Obviously this is only apparent on very slow connections, but can be an issue
+							depending on the site. This is a fairly basic example of that, but you can imagine on heavier pages this could cause serious issues.
+						</aside>
+					</section>
+
 				</section>
 
 				<section>
@@ -487,9 +514,8 @@ flex: 1 0 auto; }
 						<li><a href="http://the-echoplex.net/flexyboxes/">Flexbox Playground</a></li>
 					</ul>
 					<aside class="notes">
-						Oviously theres a little more going on here css wise but this is all you need to create fluid gallery layouts. Traditionaly grid layouts done with
-						flex require using the clearfix or adding negative margins to fix floating issues. Flex takes care of this by simply defining flex-wrap: wrap;
-						clearing its siblings properly. Additionally flexbox takes care of ensuring that all children are equal heights. No more padding hacks or overflow tricks
+						After giving flexbox some serious use in some of my most recent projects I Find it incredibly hard to go back unless necessary. I hope you gained some insight
+						into this fantastic new layout system and use it on your next project, browser support permitting.
 					</aside>
 				</section>
 

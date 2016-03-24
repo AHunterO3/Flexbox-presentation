@@ -105,3 +105,15 @@ header {
 footer {
     background-color: green;
 }
+
+.grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.grid-item {
+    flex-basis: 33%;
+    flex-basis: percentage(1/3);
+    flex: 0 0 33%;
+}
